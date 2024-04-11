@@ -1,17 +1,20 @@
 <?php
-$name = $_POST['name'];
-$visitor_email = $_POST['email'];
-$subject = $_POST['subject'];
-$message = $_POST['message'];
+    if (isset($POST['submit'])) {
+        $email = $_POST['email'];
+    }
 
-$email_from = "";
-$email_subject = "New Form Submission";
-$email_body = "User : $name.\n"."User Email : $visitor_email.\n"."Subject : $subject.\n"."Message : $message.\n";
+    $errorEmail = false;
 
-$to = "";
-$headers = "From : $email_from \r\n";
-$headers .= "Reply-To : $visitor_email \r\n";
-
-mail($to, $email_subject, $email_body, $headers);
-header("Location : ./contact.html")
+    if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+        echo "alert('Fill in valid email address')";
+    } else {
+        echo "alert('Success!')";
+    }
 ?>
+
+
+<script>
+    if (errorEmail == false) {
+        $('#con-email','#con-name','#con-sub','#con-msg').val("");
+    }
+</script>
